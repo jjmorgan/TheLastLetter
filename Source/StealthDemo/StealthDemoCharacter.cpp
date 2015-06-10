@@ -214,6 +214,17 @@ void AStealthDemoCharacter::AddInventoryItem(int32 id, UStaticMesh *item_mesh, A
 	SwitchHoldingItem();
 }
 
+void  AStealthDemoCharacter::CheckHoldingItem(int32 id, UStaticMesh *item_mesh, bool& result)
+{
+	if (InventoryIndex == 0) {
+		result = false;
+		return;
+	}
+
+	InventoryItem current = Inventory[InventoryIndex - 1];
+	result = (current.id == id && current.item_mesh == item_mesh);
+}
+
 void AStealthDemoCharacter::SwitchHoldingItem()
 {
 	if (InventoryIndex > Inventory.size())

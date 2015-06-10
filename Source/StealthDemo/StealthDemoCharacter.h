@@ -191,6 +191,9 @@ public:
 		void AddInventoryItem(int32 id, UStaticMesh *item_mesh, AActor *pickup_actor, FVector hand_position, FRotator hand_rotation, bool throwable);
 
 	UFUNCTION(BlueprintCallable, Category = Gameplay)
+		void CheckHoldingItem(int32 id, UStaticMesh *item_mesh, bool& result);
+
+	UFUNCTION(BlueprintCallable, Category = Gameplay)
 		void RemoveCurrentInventoryItem();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Gameplay)

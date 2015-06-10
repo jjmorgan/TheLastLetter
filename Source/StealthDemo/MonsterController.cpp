@@ -23,7 +23,7 @@ void AMonsterController::Initialize()
 	//GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, FString::FromInt(Blackboard->GetNumKeys()));
 
 	// Initialize blackboard values
-	Blackboard->SetValueAsBool(Blackboard->GetKeyID("InRoom"), false);
+	//Blackboard->SetValueAsBool(Blackboard->GetKeyID("InRoom"), false);
 	Blackboard->SetValueAsBool(Blackboard->GetKeyID("NearDoor"), false);
 	Blackboard->SetValueAsBool(Blackboard->GetKeyID("BeginPatrol"), true);
 	Blackboard->SetValueAsVector(Blackboard->GetKeyID("NextLoc"), FVector(0.0f, 0.0f, 0.0f));
