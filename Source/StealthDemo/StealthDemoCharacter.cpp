@@ -38,7 +38,7 @@ AStealthDemoCharacter::AStealthDemoCharacter(const FObjectInitializer& ObjectIni
 	BaseLookUpRate = 45.f;
 
 	// initialize stamina
-	Stamina = 100.0f;
+	Stamina = 150.0f;
 	StaminaState = SS_Normal;
 
 	// other attributes
@@ -286,8 +286,8 @@ void AStealthDemoCharacter::Tick(float DeltaSeconds)
 	}
 	if (Stamina < 0.0f)
 		Stamina = 0.0f;
-	else if (Stamina > 100.0f)
-		Stamina = 100.0f;
+	else if (Stamina > 150.0f)
+		Stamina = 150.0f;
 
 	// State machine for controlling stamina sounds
 	switch (StaminaState) {
