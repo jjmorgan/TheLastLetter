@@ -19,7 +19,7 @@ AStealthDemoCharacter::AStealthDemoCharacter(const FObjectInitializer& ObjectIni
 	/// Mesh is inherited
 
 	/*
-	// Create a CameraComponent	
+	// Create a CameraComponent
 	FirstPersonCameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("FirstPersonCamera"));
 	FirstPersonCameraComponent->AttachParent = GetMesh();
 	//FirstPersonCameraComponent->RelativeLocation = FVector(0, 0, 64.f); // Position the camera
@@ -38,7 +38,7 @@ AStealthDemoCharacter::AStealthDemoCharacter(const FObjectInitializer& ObjectIni
 	BaseLookUpRate = 45.f;
 
 	// initialize stamina
-	Stamina = 100.0f;
+	Stamina = 150.0f;
 	StaminaState = SS_Normal;
 
 	// other attributes
@@ -157,7 +157,7 @@ void AStealthDemoCharacter::LookUpAtRate(float Rate)
 		FString RateFloat = FString::SanitizeFloat(Rate);
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, RateFloat);
 	}
-		
+
 	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
@@ -183,7 +183,7 @@ void AStealthDemoCharacter::UseItemRelease()
 			ThrowItem(Inventory[InventoryIndex - 1].item_mesh, Inventory[InventoryIndex - 1].pickup_actor);
 			RemoveCurrentInventoryItem();
 		}
-			
+
 		EndAim();
 	}
 
@@ -207,11 +207,22 @@ void AStealthDemoCharacter::AddInventoryItem(int32 id, UStaticMesh *item_mesh, A
 	newitem.throwable = throwable;
 
 	Inventory.push_back(newitem);
-	
+
 	PickedUpNew = true;
 
 	InventoryIndex = Inventory.size();
 	SwitchHoldingItem();
+}
+
+void  AStealthDemoCharacter::CheckHoldingItem(int32 id, UStaticMesh *item_mesh, bool& result)
+{
+	if (InventoryIndex == 0) {
+		result = false;
+		return;
+	}
+
+	InventoryItem current = Inventory[InventoryIndex - 1];
+	result = (current.id == id && current.item_mesh == item_mesh);
 }
 
 void AStealthDemoCharacter::SwitchHoldingItem()
@@ -275,8 +286,8 @@ void AStealthDemoCharacter::Tick(float DeltaSeconds)
 	}
 	if (Stamina < 0.0f)
 		Stamina = 0.0f;
-	else if (Stamina > 100.0f)
-		Stamina = 100.0f;
+	else if (Stamina > 150.0f)
+		Stamina = 150.0f;
 
 	// State machine for controlling stamina sounds
 	switch (StaminaState) {

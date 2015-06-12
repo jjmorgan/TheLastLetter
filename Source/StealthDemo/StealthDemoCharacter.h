@@ -10,7 +10,7 @@ class UInputComponent;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FMoveToPositionDelegate);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FUseItemDelegate);
 
-UCLASS(config=Game)
+UCLASS(config = Game)
 class AStealthDemoCharacter : public ACharacter
 {
 	GENERATED_BODY()
@@ -191,6 +191,9 @@ public:
 		void AddInventoryItem(int32 id, UStaticMesh *item_mesh, AActor *pickup_actor, FVector hand_position, FRotator hand_rotation, bool throwable);
 
 	UFUNCTION(BlueprintCallable, Category = Gameplay)
+		void CheckHoldingItem(int32 id, UStaticMesh *item_mesh, bool& result);
+
+	UFUNCTION(BlueprintCallable, Category = Gameplay)
 		void RemoveCurrentInventoryItem();
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Gameplay)
@@ -205,4 +208,3 @@ public:
 	UFUNCTION(BlueprintImplementableEvent, Category = Gameplay)
 		void EndAim();
 };
-
